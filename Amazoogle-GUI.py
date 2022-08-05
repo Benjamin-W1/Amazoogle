@@ -1,41 +1,43 @@
-import tkinter as tk
-from functools import partial
+import PySimpleGUI as sg
 
-# GUI config
-window = tk.Tk()
-window.iconbitmap(r".\media\icon.ico")
-window.title("Amazoogle GUI")
-window.geometry('300x300')
-window.configure(bg='white')
-window.grid_rowconfigure(0, weight=1)
-window.grid_columnconfigure(0, weight=1)
+def login(username, password, old_window):
+    if True:
+        #LOG IN SUCCESS
+        search_window(old_window)
+    else:
+        #INVALID CREDENTIALS
+        sg.Popup("Sorry your username or password is incorrect.")
 
-# Nav Bar
-## Logo Image
-img = tk.PhotoImage(file='media\logo - small.png')
-logo_lbl = tk.Label(
-    window,
-    image=img,
-    borderwidth=0
-)
-logo_lbl.grid(row=0, column=0, columnspan=2)
-logo_lbl.grid_rowconfigure(1, weight=1)
-logo_lbl.grid_columnconfigure(1, weight=1)
+def search_window(old_window):
+    old_window.Close()
+    
+    next = [[sg.Image('media/logo - small.png', size=(178,55))],
+          [sg.Text('Search: ', background_color='#FFFFFF', text_color='#000000'),sg.InputText(),sg.Submit()]]
 
-# LOGIN
-def validateLogin(username, password):
-    return
-usernameLabel = tk.Label(window, text="User Name: ", bg='white').grid(row=1, column=0)
-username = tk.StringVar()
-usernameEntry = tk.Entry(window, textvariable=username).grid(row=1, column=1)  
-passwordLabel = tk.Label(window,text="Password: ", bg='white').grid(row=2, column=0)  
-password = tk.StringVar()
-passwordEntry = tk.Entry(window, textvariable=password, show='*').grid(row=2, column=1)  
-validateLogin = partial(validateLogin, username, password)
+    window = sg.Window('Amazoogle', next, element_justification='c', background_color='#FFFFFF', icon="media/icon.ico")
+    event, values = window.Read()
 
-#login button
-loginButton = tk.Button(window, text="Login", command=validateLogin).grid(row=3, column=0)  
+    window.Close()
+
+def results_window(old_window):
+    old_window.Close()
+    
+    next = [[sg.Image('media/logo - small.png', size=(178,55))],
+          [sg.Text('MED_DATA_20220803153921.csv', background_color='#FFFFFF', text_color='#000000'),sg.Text('2022/08/03/153921', background_color='#FFFFFF', text_color='#000000'),sg.Submit()]]
+
+    window = sg.Window('Amazoogle', next, element_justification='c', background_color='#FFFFFF', icon="media/icon.ico")
+    event, values = window.Read()
+
+    window.Close()
 
 
+if __name__ == "__main__":
+    login_layout = [[sg.Image('media/logo - small.png', size=(178,55))],
+              [sg.Text('Username: ', background_color='#FFFFFF', text_color='#000000'),sg.InputText()],
+              [sg.Text('Password: ', background_color='#FFFFFF', text_color='#000000'),sg.InputText()],
+              [sg.Submit()]]
 
-window.mainloop()
+    window = sg.Window('Amazoogle', login_layout, element_justification='c', background_color='#FFFFFF', icon="media/icon.ico")
+
+    event, values = window.Read()
+    login(values[1], values[2], window)
