@@ -7,31 +7,38 @@ def login(username, password, old_window):
     else:
         #INVALID CREDENTIALS
         sg.Popup("Sorry your username or password is incorrect.")
+        login_window()
 
 def search_window(old_window):
     old_window.Close()
     
-    next = [[sg.Image('media/logo - small.png', size=(178,55))],
-          [sg.Text('Search: ', background_color='#FFFFFF', text_color='#000000'),sg.InputText(),sg.Submit()]]
+    l = []
+    next = [
+          [sg.Image('media/logo - small.png', size=(178,55))],
+          [sg.Text('Search: ', background_color='#FFFFFF', text_color='#000000'),sg.InputText(),sg.Submit()],
+          [sg.Listbox(l, size=(70, 10), key='-LIST-',enable_events=True)],
+          [sg.Button('Download',key='-DOWNLOAD-')]
+          ]
 
     window = sg.Window('Amazoogle', next, element_justification='c', background_color='#FFFFFF', icon="media/icon.ico")
-    event, values = window.Read()
 
-    window.Close()
+    while True:
+        event, values = window.read()
+        if event == sg.WIN_CLOSED or event == 'Exit':
+            break
+        elif event == '-DOWNLOAD-':
+            filename = l[window.Element('-LIST-').Widget.curselection()[0]]
+            #DOWNLOAD FILE
+        elif event == 'Submit':
+            searchQuery = values[1]
+            #SEARCH FTP AND RETURN VALUES AS LIST
+            results = []
+            l = []
+            for result in results:
+                l.append(result)
+            window.Element('-LIST-').update(values=l)
 
-def results_window(old_window):
-    old_window.Close()
-    
-    next = [[sg.Image('media/logo - small.png', size=(178,55))],
-          [sg.Text('MED_DATA_20220803153921.csv', background_color='#FFFFFF', text_color='#000000'),sg.Text('2022/08/03/153921', background_color='#FFFFFF', text_color='#000000'),sg.Submit()]]
-
-    window = sg.Window('Amazoogle', next, element_justification='c', background_color='#FFFFFF', icon="media/icon.ico")
-    event, values = window.Read()
-
-    window.Close()
-
-
-if __name__ == "__main__":
+def login_window():
     login_layout = [[sg.Image('media/logo - small.png', size=(178,55))],
               [sg.Text('Username: ', background_color='#FFFFFF', text_color='#000000'),sg.InputText()],
               [sg.Text('Password: ', background_color='#FFFFFF', text_color='#000000'),sg.InputText()],
@@ -40,4 +47,10 @@ if __name__ == "__main__":
     window = sg.Window('Amazoogle', login_layout, element_justification='c', background_color='#FFFFFF', icon="media/icon.ico")
 
     event, values = window.Read()
-    login(values[1], values[2], window)
+    if event == sg.WIN_CLOSED or event == 'Exit':
+        pass
+    elif event == "Submit":
+        login(values[1], values[2], window)
+
+if __name__ == "__main__":
+    login_window()
