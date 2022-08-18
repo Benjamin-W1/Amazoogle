@@ -12,11 +12,11 @@ class FTP_Comms:
             self.ftp = None
             return False
 
-
+    # Download file with the given name. Throw error if no such file exists.
     def get_file(self, name):
         # https://stackoverflow.com/questions/11573817/how-to-download-a-file-via-ftp-with-python-ftplib
         self.ftp.retrbinary("RETR " + filename ,open(name, 'wb').write)
 
-
+    # Logout.
     def logout(self):
         self.ftp.quit()
