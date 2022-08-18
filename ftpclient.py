@@ -11,6 +11,16 @@ class FTP_Comms:
         except ftplib.error_perm:
             self.ftp = None
             return False
+        
+    # Search for files containing keyword. Returns a list of all such filenames.
+    def search(self, keyword):
+        x = self.ftp.nlst()
+        listToReturn = []
+        for i in x:
+            if keyword in i:
+                listToReturn.append(i)
+        return listToReturn
+
 
     # Download file with the given name. Throw error if no such file exists.
     def get_file(self, name):
