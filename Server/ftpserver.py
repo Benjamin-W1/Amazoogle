@@ -8,8 +8,7 @@ def main():
     # Instantiate a dummy authorizer for managing 'virtual' users
     authorizer = DummyAuthorizer()
 
-    # Define a new user having full r/w permissions and a read-only
-    # anonymous user
+    # Define a new user having full r/w permissions
     authorizer.add_user('user', '12345', '.', perm='elradfmwMT')
     authorizer.add_anonymous(os.getcwd())
 
@@ -24,8 +23,8 @@ def main():
     address = ('', 21)
     server = FTPServer(address, handler)
 
-    # set a limit for connections
-    server.max_cons = 3
+    # Limit to one connection at a time.
+    server.max_cons = 1
     server.max_cons_per_ip = 1
 
     # start ftp server
