@@ -1,6 +1,5 @@
 from ftplib import FTP
 from re import L
-from this import d
 import fileValidation
 import archiver_tool
 import os
