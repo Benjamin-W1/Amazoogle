@@ -1,3 +1,4 @@
+import ftpclient
 
 HELP = """help - displays this help page
 exit - logs out from the FTP server and exits the terminal
@@ -7,13 +8,13 @@ download <filename> - downloads the file from the server
 
 if __name__ == "__main__":
     print("Welcome to the Amazoogle FTP client.\nEnter your credentials to get started.")
-
+    ftp_object = ftpclient.FTP_Comms()
     loggedin = False
     while loggedin == False:
         username = input("username: ")
         password = input("password: ")
-        #LOGIN TO FTP SERVER
-        if True:
+        #LOGIN TO FTP SERVER AND CHECK IF CORRECT CREDENTIALS ARE PROVIDED
+        if ftp_object.login(username, password):
             #LOGIN SUCCESS
             loggedin = True
             print("You are logged in as "+username+". Type 'help' to get help.")
