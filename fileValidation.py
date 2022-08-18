@@ -19,7 +19,7 @@ def validateFileName(path):
     x = path.split("/")
     name = x[len(x) - 1]
     # must match     MED_DATA_  Y    Y    Y    Y    M    M    D    D    H    H    M    M    S    S     .csv
-    return re.search("MED_DATA_[0-2][0-9][0-9][0-9][0-1][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.csv*", name)
+    return re.search("MED_DATA_[0-2][0-9][0-9][0-9][0-1][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.csv", name)
 
 def validateFile(path):
     if not validateFileName(path):
