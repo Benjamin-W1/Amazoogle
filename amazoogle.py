@@ -27,7 +27,8 @@ if __name__ == "__main__":
         if command == "help":
             print(HELP)
         elif command == "exit":
-            #DO LOGOUT STUFF
+            #LOGOUT
+            ftp_object.logout()
             break
         elif len(command) >= 6 and command[:6] == "search":
             #SEARCH
