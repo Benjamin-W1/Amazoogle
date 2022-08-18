@@ -1,7 +1,9 @@
 import PySimpleGUI as sg
+import ftpclient
 
 def login(username, password, old_window):
-    if True:
+    resp = ftp.login(username,password)
+    if resp:
         #LOG IN SUCCESS
         search_window(old_window)
     else:
@@ -25,14 +27,19 @@ def search_window(old_window):
     while True:
         event, values = window.read()
         if event == sg.WIN_CLOSED or event == 'Exit':
+            ftp.logout()
             break
         elif event == '-DOWNLOAD-':
             filename = l[window.Element('-LIST-').Widget.curselection()[0]]
-            #DOWNLOAD FILE
+            resp = ftp.get_file(filename)
+            if resp:
+                sg.Popup("File downloaded")
+            else:
+                sg.Popup("File format is invalid!")
         elif event == 'Submit':
-            searchQuery = values[1]
+            searchQuery = values[1].upper()
             #SEARCH FTP AND RETURN VALUES AS LIST
-            results = []
+            results = ftp.search(searchQuery)
             l = []
             for result in results:
                 l.append(result)
@@ -53,4 +60,5 @@ def login_window():
         login(values[1], values[2], window)
 
 if __name__ == "__main__":
+    ftp = ftpclient.FTP_Comms()
     login_window()
