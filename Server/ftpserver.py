@@ -5,27 +5,37 @@ from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import FTPServer
 
 def main():
+    # Instantiate a dummy authorizer for managing 'virtual' users
     authorizer = DummyAuthorizer()
 
-    authorizer.add_user('user', '12345', '.', perm='elradfmwMT')  # Add user with full permissions.
-    authorizer.add_anonymous(os.getcwd())  # Anonymous user with read-only privileges
+    # Define a new user having full r/w permissions and a read-only
+    # anonymous user
+    authorizer.add_user('user', '12345', '.', perm='elradfmwMT')
+    authorizer.add_anonymous(os.getcwd())
 
-    # FTP handler
+    # Instantiate FTP handler class
     handler = FTPHandler
     handler.authorizer = authorizer
 
-    
-    handler.banner = "pyftpdlib based ftp ready."
+    # Define a customized banner (string returned when client connects)
+    handler.banner = "pyftpdlib based ftpd ready."
 
-    # Set up server to listen on any IP address at port 5123
-    address=('',5123)
-    server= FTPServer(address, handler)
+    # Specify a masquerade address and the range of ports to use for
+    # passive connections.  Decomment in case you're behind a NAT.
+    #handler.masquerade_address = '151.25.42.11'
+    #handler.passive_ports = range(60000, 65535)
 
-    # Limit connections to 1
-    server.max_cons = 1
-    server.max_cons_per_ip = 1
+    # Instantiate FTP server class and listen on 0.0.0.0:21
+    address = ('', 21)
+    server = FTPServer(address, handler)
 
+    # set a limit for connections
+    server.max_cons = 256
+    server.max_cons_per_ip = 5
+
+    # start ftp server
     server.serve_forever()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
+
