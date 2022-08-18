@@ -1,4 +1,9 @@
 from ftplib import FTP
+from re import L
+from this import d
+import fileValidation
+import archiver_tool
+import os
 
 class FTP_Comms:
     ftp = None
@@ -8,7 +13,7 @@ class FTP_Comms:
         try:
             self.ftp = FTP("127.0.0.1", username, password)
             return True
-        except ftplib.error_perm:
+        except:
             self.ftp = None
             return False
         
@@ -25,7 +30,16 @@ class FTP_Comms:
     # Download file with the given name. Throw error if no such file exists.
     def get_file(self, name):
         # https://stackoverflow.com/questions/11573817/how-to-download-a-file-via-ftp-with-python-ftplib
-        self.ftp.retrbinary("RETR " + filename ,open(name, 'wb').write)
+        self.ftp.retrbinary("RETR " + name ,open(name, 'wb').write)
+        resp = fileValidation.validateFile(name)
+        if resp == True:
+            archiver_tool.store_file(name)
+            return True
+        else:
+            os.remove(name)
+            return False
+        
+
 
     # Logout.
     def logout(self):
