@@ -40,6 +40,7 @@ if __name__ == "__main__":
             #download
             if len(command.split(" ")) > 1 and len(command.split(" ")[1]) > 0:
                 query = command.split(" ")[1]
+                ftp_object.get_file(query)
             else:
                 print("Enter a file name")
         else:
