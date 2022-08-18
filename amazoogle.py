@@ -34,6 +34,7 @@ if __name__ == "__main__":
             #SEARCH
             if len(command.split(" ")) > 1 and len(command.split(" ")[1]) > 0:
                 query = command.split(" ")[1]
+                ftp_object.search(query)
             else:
                 print("Enter a search query")
         elif len(command) >= 8 and command[:8] == "download":
