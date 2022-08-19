@@ -6,11 +6,7 @@
 
 # The Project 
 
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image1.png "image_tooltip")
-
+![Project Logo](media/logo - small.png "image_tooltip")
 
 Our code: [https://github.com/Benjamin-W1/Amazoogle](https://github.com/Benjamin-W1/Amazoogle)
 
@@ -60,17 +56,9 @@ I tested my code throughout development, making sure that it worked before addin
 My role was the design and creation of the Graphical User Interface and Command Line Interface. Once I had established what widgets the GUI would require I designed how it would look. I chose to create the interfaces using Python as it is the language I am best at and, originally, I started using the Tkinter module to create the GUI. However, I was finding it difficult to arrange the widgets using Tkinter and so another member of my team suggested using PySimpleGUI. I found PySimpleGui much easier to use and so I went about learning how to use it. Once I had a basic understanding of how to use the module I created a simple login page and search page. The login page had entry boxes for a username and password, both of which the ftp server required. The search page has a search box, a results box and a button to download the selected file. The results box is empty by default and gets populated with results once a search is submitted.
 
 
+![GUI Screenshot 1](media/screenshot1.png "image_tooltip")
 
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image2.png "image_tooltip")
- 
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image3.png "image_tooltip")
+![GUI Screenshot 2](media/screenshot2.png "image_tooltip")
 
 
 After I had created the GUI I started work on the Command Line Interface. The CLI was much easier as I had already worked out what features to include. I used a simple while True loop with an input for commands. The available commands are as follows:
@@ -83,11 +71,7 @@ After I had created the GUI I started work on the Command Line Interface. The CL
 * Download &lt;filename> - downloads the specified file from the server
 
 
-
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image4.png "image_tooltip")
+![CLI Screenshot](media/screenshot3.png "image_tooltip")
 
 
 Finally, I integrated my teammates' sections of the project into the interfaces. This meant importing the FTP code, file archiving, file validation and logging.
