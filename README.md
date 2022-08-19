@@ -6,7 +6,7 @@
 
 # The Project 
 
-![Project Logo](media/logo - small.png "image_tooltip")
+![Project Logo](media/logo.png "image_tooltip")
 
 Our code: [https://github.com/Benjamin-W1/Amazoogle](https://github.com/Benjamin-W1/Amazoogle)
 
