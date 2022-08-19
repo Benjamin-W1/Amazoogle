@@ -18,9 +18,9 @@ class FTP_Comms:
         
     # Search for files containing keyword. Returns a list of all such filenames.
     def search(self, keyword):
-        x = self.ftp.nlst()
+        filename_list = self.ftp.nlst()
         listToReturn = []
-        for i in x:
+        for i in filename_list:
             if keyword in i:
                 listToReturn.append(i)
         return listToReturn
